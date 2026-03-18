@@ -1,0 +1,571 @@
+{
+  "name": "gitstorm",
+  "displayName": "GitStorm",
+  "description": "WebStorm-level Git tooling for VS Code — full commit graph, file history, blame, changelists, shelve, branch management, merge tooling, and GitHub integration.",
+  "version": "0.1.0",
+  "publisher": "gitstorm",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:.git"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "gitstorm",
+          "title": "GitStorm",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "gitstorm": [
+        {
+          "id": "gitstorm.logView",
+          "name": "Git Log",
+          "type": "webview"
+        },
+        {
+          "id": "gitstorm.branches",
+          "name": "Branches",
+          "type": "tree"
+        },
+        {
+          "id": "gitstorm.stashes",
+          "name": "Stashes",
+          "type": "tree"
+        },
+        {
+          "id": "gitstorm.changelists",
+          "name": "Changelists",
+          "type": "tree"
+        },
+        {
+          "id": "gitstorm.prView",
+          "name": "Pull Requests",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "gitstorm.showLog",
+        "title": "GitStorm: Show Git Log"
+      },
+      {
+        "command": "gitstorm.showFileHistory",
+        "title": "GitStorm: Show File History",
+        "icon": "$(history)"
+      },
+      {
+        "command": "gitstorm.annotateFile",
+        "title": "GitStorm: Annotate (Blame)"
+      },
+      {
+        "command": "gitstorm.compareWithBranch",
+        "title": "GitStorm: Compare with Branch..."
+      },
+      {
+        "command": "gitstorm.compareWithRevision",
+        "title": "GitStorm: Compare with Revision..."
+      },
+      {
+        "command": "gitstorm.showDiff",
+        "title": "GitStorm: Show Diff"
+      },
+      {
+        "command": "gitstorm.rollbackFile",
+        "title": "GitStorm: Rollback File"
+      },
+      {
+        "command": "gitstorm.createBranch",
+        "title": "GitStorm: Create Branch..."
+      },
+      {
+        "command": "gitstorm.checkoutBranch",
+        "title": "GitStorm: Checkout Branch..."
+      },
+      {
+        "command": "gitstorm.mergeBranch",
+        "title": "GitStorm: Merge Branch..."
+      },
+      {
+        "command": "gitstorm.rebaseBranch",
+        "title": "GitStorm: Rebase onto Branch..."
+      },
+      {
+        "command": "gitstorm.deleteBranch",
+        "title": "GitStorm: Delete Branch..."
+      },
+      {
+        "command": "gitstorm.compareBranches",
+        "title": "GitStorm: Compare Branches..."
+      },
+      {
+        "command": "gitstorm.interactiveRebase",
+        "title": "GitStorm: Interactive Rebase..."
+      },
+      {
+        "command": "gitstorm.resolveConflicts",
+        "title": "GitStorm: Resolve Merge Conflicts"
+      },
+      {
+        "command": "gitstorm.goToCommit",
+        "title": "GitStorm: Go to Commit in Log"
+      },
+      {
+        "command": "gitstorm.abortMerge",
+        "title": "GitStorm: Abort Merge"
+      },
+      {
+        "command": "gitstorm.continueMerge",
+        "title": "GitStorm: Continue Merge"
+      },
+      {
+        "command": "gitstorm.abortRebase",
+        "title": "GitStorm: Abort Rebase"
+      },
+      {
+        "command": "gitstorm.continueRebase",
+        "title": "GitStorm: Continue Rebase"
+      },
+      {
+        "command": "gitstorm.tree.checkout",
+        "title": "Checkout"
+      },
+      {
+        "command": "gitstorm.tree.mergeBranch",
+        "title": "Merge into Current"
+      },
+      {
+        "command": "gitstorm.tree.rebaseBranch",
+        "title": "Rebase onto Current"
+      },
+      {
+        "command": "gitstorm.tree.deleteBranch",
+        "title": "Delete Branch"
+      },
+      {
+        "command": "gitstorm.tree.compareBranch",
+        "title": "Compare with Current"
+      },
+      {
+        "command": "gitstorm.tree.applyStash",
+        "title": "Apply Stash"
+      },
+      {
+        "command": "gitstorm.tree.popStash",
+        "title": "Pop Stash"
+      },
+      {
+        "command": "gitstorm.tree.dropStash",
+        "title": "Drop Stash"
+      },
+      {
+        "command": "gitstorm.tree.showStashDiff",
+        "title": "Show Diff"
+      },
+      {
+        "command": "gitstorm.tree.createChangelist",
+        "title": "New Changelist"
+      },
+      {
+        "command": "gitstorm.tree.renameChangelist",
+        "title": "Rename Changelist"
+      },
+      {
+        "command": "gitstorm.tree.deleteChangelist",
+        "title": "Delete Changelist"
+      },
+      {
+        "command": "gitstorm.tree.setDefaultChangelist",
+        "title": "Set as Default"
+      },
+      {
+        "command": "gitstorm.tree.showFileDiff",
+        "title": "Show Diff"
+      },
+      {
+        "command": "gitstorm.tree.moveFile",
+        "title": "Move to Changelist..."
+      },
+      {
+        "command": "gitstorm.tree.removeFile",
+        "title": "Remove from Changelist"
+      },
+      {
+        "command": "gitstorm.tree.commitChangelist",
+        "title": "Commit All"
+      },
+      {
+        "command": "gitstorm.shelveChanges",
+        "title": "GitStorm: Shelve Changes..."
+      },
+      {
+        "command": "gitstorm.unshelveChanges",
+        "title": "GitStorm: Unshelve Changes..."
+      },
+      {
+        "command": "gitstorm.createChangelist",
+        "title": "GitStorm: Create Changelist..."
+      },
+      {
+        "command": "gitstorm.moveToChangelist",
+        "title": "GitStorm: Move to Changelist..."
+      },
+      {
+        "command": "gitstorm.partialCommit",
+        "title": "GitStorm: Commit Selected Lines/Hunks..."
+      },
+      {
+        "command": "gitstorm.stashChanges",
+        "title": "GitStorm: Stash Changes..."
+      },
+      {
+        "command": "gitstorm.popStash",
+        "title": "GitStorm: Pop Stash..."
+      },
+      {
+        "command": "gitstorm.applyStash",
+        "title": "GitStorm: Apply Stash..."
+      },
+      {
+        "command": "gitstorm.dropStash",
+        "title": "GitStorm: Drop Stash..."
+      },
+      {
+        "command": "gitstorm.createPullRequest",
+        "title": "GitStorm: Create Pull Request..."
+      },
+      {
+        "command": "gitstorm.viewPullRequests",
+        "title": "GitStorm: View Pull Requests"
+      },
+      {
+        "command": "gitstorm.reviewPullRequest",
+        "title": "GitStorm: Review Pull Request..."
+      },
+      {
+        "command": "gitstorm.createGist",
+        "title": "GitStorm: Create Gist..."
+      },
+      {
+        "command": "gitstorm.refreshLog",
+        "title": "GitStorm: Refresh Log",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "gitstorm.toggleAnnotations",
+        "title": "GitStorm: Toggle Inline Blame Annotations"
+      },
+      {
+        "command": "gitstorm.cherryPick",
+        "title": "GitStorm: Cherry-Pick Commit..."
+      },
+      {
+        "command": "gitstorm.revertCommit",
+        "title": "GitStorm: Revert Commit..."
+      },
+      {
+        "command": "gitstorm.resetToCommit",
+        "title": "GitStorm: Reset to Commit..."
+      },
+      {
+        "command": "gitstorm.tagCommit",
+        "title": "GitStorm: Tag Commit..."
+      },
+      {
+        "command": "gitstorm.copyCommitHash",
+        "title": "GitStorm: Copy Commit Hash"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "gitstorm.showFileHistory",
+          "group": "gitstorm@1",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.annotateFile",
+          "group": "gitstorm@2",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file && !explorerResourceIsFolder"
+        },
+        {
+          "command": "gitstorm.compareWithBranch",
+          "group": "gitstorm@3",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file && !explorerResourceIsFolder"
+        },
+        {
+          "command": "gitstorm.compareWithRevision",
+          "group": "gitstorm@4",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file && !explorerResourceIsFolder"
+        },
+        {
+          "command": "gitstorm.showDiff",
+          "group": "gitstorm@5",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file && !explorerResourceIsFolder"
+        },
+        {
+          "command": "gitstorm.rollbackFile",
+          "group": "gitstorm@6",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file && !explorerResourceIsFolder"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "gitstorm.showFileHistory",
+          "group": "gitstorm@1",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.annotateFile",
+          "group": "gitstorm@2",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.compareWithBranch",
+          "group": "gitstorm@3",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.compareWithRevision",
+          "group": "gitstorm@4",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.showDiff",
+          "group": "gitstorm@5",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.rollbackFile",
+          "group": "gitstorm@6",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.partialCommit",
+          "group": "gitstorm@7",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file && editorHasSelection"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "gitstorm.showFileHistory",
+          "group": "navigation",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        },
+        {
+          "command": "gitstorm.toggleAnnotations",
+          "group": "navigation",
+          "when": "gitOpenRepositoryCount != 0 && resourceScheme == file"
+        }
+      ],
+      "scm/resourceState/context": [
+        {
+          "command": "gitstorm.moveToChangelist",
+          "group": "gitstorm@1",
+          "when": "scmProvider == git"
+        },
+        {
+          "command": "gitstorm.shelveChanges",
+          "group": "gitstorm@2",
+          "when": "scmProvider == git"
+        },
+        {
+          "command": "gitstorm.showFileHistory",
+          "group": "gitstorm@3",
+          "when": "scmProvider == git"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "gitstorm.refreshLog",
+          "when": "view == gitstorm.logView",
+          "group": "navigation"
+        },
+        {
+          "command": "gitstorm.tree.createChangelist",
+          "when": "view == gitstorm.changelists",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "gitstorm.tree.checkout",
+          "when": "view == gitstorm.branches && viewItem == localBranch",
+          "group": "inline"
+        },
+        {
+          "command": "gitstorm.tree.mergeBranch",
+          "when": "view == gitstorm.branches && viewItem =~ /localBranch|remoteBranch/",
+          "group": "branch@1"
+        },
+        {
+          "command": "gitstorm.tree.rebaseBranch",
+          "when": "view == gitstorm.branches && viewItem =~ /localBranch|remoteBranch/",
+          "group": "branch@2"
+        },
+        {
+          "command": "gitstorm.tree.deleteBranch",
+          "when": "view == gitstorm.branches && viewItem == localBranch",
+          "group": "branch@3"
+        },
+        {
+          "command": "gitstorm.tree.compareBranch",
+          "when": "view == gitstorm.branches && viewItem =~ /localBranch|remoteBranch/",
+          "group": "branch@4"
+        },
+        {
+          "command": "gitstorm.tree.applyStash",
+          "when": "view == gitstorm.stashes && viewItem == stashEntry",
+          "group": "stash@1"
+        },
+        {
+          "command": "gitstorm.tree.popStash",
+          "when": "view == gitstorm.stashes && viewItem == stashEntry",
+          "group": "stash@2"
+        },
+        {
+          "command": "gitstorm.tree.dropStash",
+          "when": "view == gitstorm.stashes && viewItem == stashEntry",
+          "group": "stash@3"
+        },
+        {
+          "command": "gitstorm.tree.showStashDiff",
+          "when": "view == gitstorm.stashes && viewItem =~ /stashEntry|stashFile/",
+          "group": "inline"
+        },
+        {
+          "command": "gitstorm.tree.renameChangelist",
+          "when": "view == gitstorm.changelists && viewItem =~ /changelist|defaultChangelist/",
+          "group": "changelist@1"
+        },
+        {
+          "command": "gitstorm.tree.setDefaultChangelist",
+          "when": "view == gitstorm.changelists && viewItem == changelist",
+          "group": "changelist@2"
+        },
+        {
+          "command": "gitstorm.tree.deleteChangelist",
+          "when": "view == gitstorm.changelists && viewItem == changelist",
+          "group": "changelist@3"
+        },
+        {
+          "command": "gitstorm.tree.commitChangelist",
+          "when": "view == gitstorm.changelists && viewItem =~ /changelist|defaultChangelist/",
+          "group": "changelist@4"
+        },
+        {
+          "command": "gitstorm.tree.showFileDiff",
+          "when": "view == gitstorm.changelists && viewItem == changelistFile",
+          "group": "inline"
+        },
+        {
+          "command": "gitstorm.tree.moveFile",
+          "when": "view == gitstorm.changelists && viewItem == changelistFile",
+          "group": "file@1"
+        },
+        {
+          "command": "gitstorm.tree.removeFile",
+          "when": "view == gitstorm.changelists && viewItem == changelistFile",
+          "group": "file@2"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "gitstorm.showLog",
+        "key": "ctrl+shift+g l",
+        "mac": "cmd+shift+g l"
+      },
+      {
+        "command": "gitstorm.showFileHistory",
+        "key": "ctrl+shift+g h",
+        "mac": "cmd+shift+g h"
+      },
+      {
+        "command": "gitstorm.annotateFile",
+        "key": "ctrl+shift+g a",
+        "mac": "cmd+shift+g a"
+      },
+      {
+        "command": "gitstorm.toggleAnnotations",
+        "key": "ctrl+shift+g b",
+        "mac": "cmd+shift+g b"
+      }
+    ],
+    "configuration": {
+      "title": "GitStorm",
+      "properties": {
+        "gitstorm.maxLogEntries": {
+          "type": "number",
+          "default": 5000,
+          "description": "Maximum number of log entries to load"
+        },
+        "gitstorm.showInlineBlame": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inline blame annotations at end of current line"
+        },
+        "gitstorm.dateFormat": {
+          "type": "string",
+          "default": "relative",
+          "enum": [
+            "relative",
+            "absolute",
+            "iso"
+          ],
+          "description": "Date format in log and blame views"
+        },
+        "gitstorm.github.token": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub personal access token for PR integration (or use gh CLI auth)"
+        },
+        "gitstorm.graph.style": {
+          "type": "string",
+          "default": "curved",
+          "enum": [
+            "curved",
+            "angular",
+            "straight"
+          ],
+          "description": "Style of the commit graph lines"
+        },
+        "gitstorm.defaultChangelist": {
+          "type": "string",
+          "default": "Default",
+          "description": "Name of the default changelist"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "lint": "eslint src --ext ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.56.0",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.3.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0"
+  },
+  "dependencies": {}
+}
