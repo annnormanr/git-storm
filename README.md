@@ -223,6 +223,10 @@ GitStorm/
 - Git installed and available on `PATH`
 - For GitHub features: `gh` CLI authenticated, or a personal access token
 
+## Contributing
+
+Contributions are welcome! Please see the [GitHub repository](https://github.com/annnormanr/git-storm) for issues, discussions, and pull requests.
+
 ## License
 
 MIT
